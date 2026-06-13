@@ -13,6 +13,12 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "fraud_logs.db")
 
+# ---------------- DB CONNECTION FIX ----------------
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH, timeout=10)
+    conn.execute("PRAGMA journal_mode=WAL;")
+    return conn
+
 # ---------------- CONFIG ----------------
 UPLOAD_FOLDER = 'static/profile_pics'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -45,7 +51,7 @@ def do_login():
     username = request.form['username']
     password = request.form['password']
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM users WHERE username=?", (username,))
@@ -83,7 +89,7 @@ def predict():
     # ----------------------------
     # GET USER ALERT SETTINGS
     # ----------------------------
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -141,7 +147,7 @@ Thank you for always using bank secure.
         # ----------------------------
         # SAVE EMAIL LOG
         # ----------------------------
-        conn = sqlite3.connect(DB_PATH)
+        conn =  get_db_connection()
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO email_logs (recipient, message, time)
@@ -156,7 +162,7 @@ Thank you for always using bank secure.
     # ----------------------------
     # SAVE FRAUD LOG
     # ----------------------------
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -184,7 +190,7 @@ def signup():
         card_number = request.form['card_number']
         password = generate_password_hash(request.form['password'])
 
-        conn = sqlite3.connect(DB_PATH)
+        conn =  get_db_connection()
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -207,7 +213,7 @@ def profile():
     if 'user_id' not in session:
         return redirect(url_for('do_login'))
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM users WHERE id=?", (session['user_id'],))
@@ -222,7 +228,7 @@ def edit_profile():
     if 'user_id' not in session:
         return redirect(url_for('do_login'))
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     if request.method == 'POST':
@@ -250,7 +256,7 @@ def dashboard():
     if 'user_id' not in session:
         return redirect(url_for('do_login'))
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute(
@@ -270,7 +276,7 @@ def emails():
     if 'user_id' not in session:
         return redirect(url_for('do_login'))
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute(
@@ -290,7 +296,7 @@ def analytics():
     if 'user_id' not in session:
         return redirect(url_for('do_login'))
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     cursor.execute("SELECT COUNT(*) FROM fraud_logs WHERE status='Fraudulent Transaction Detected!'")
@@ -314,7 +320,7 @@ def alert_settings():
     if 'user_id' not in session:
         return redirect(url_for('do_login'))
 
-    conn = sqlite3.connect(DB_PATH)
+    conn =  get_db_connection()
     cursor = conn.cursor()
 
     if request.method == 'POST':
