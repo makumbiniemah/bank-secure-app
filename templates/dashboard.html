@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Secure Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>Bank Secure</h2>
+
+        <a href="/home">Dashboard</a>
+        <a href="/dashboard">Fraud Logs</a>
+        <a href="/emails">Email Logs</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+    <!-- Top Navigation -->
+    <div class="topbar">
+
+        <div class="left">
+            <h3>Bank Secure</h3>
+        </div>
+
+        <div class="right">
+            Welcome, {{ username }}
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <h2>Fraud Monitoring Dashboard</h2>
+
+        <p>
+            Here is your fraud monitoring dashboard.
+        </p>
+
+        <!-- CARDS CONTAINER -->
+        <div class="cards-container">
+
+            <div class="card">
+                <h3>Total Transactions</h3>
+                <p>{{ logs|length }}</p>
+            </div>
+
+            <div class="card">
+                <h3>System Status</h3>
+                <p>Online</p>
+            </div>
+
+            <div class="card">
+                <h3>Fraud Detection</h3>
+                <p>Active</p>
+            </div>
+
+        </div>
+
+        <!-- TRANSACTION TABLE -->
+
+        <h2>Recent Transactions</h2>
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Transaction Time</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+
+            {% for log in logs %}
+
+            <tr class="{% if 'Fraudulent' in log[3] %}fraud{% else %}legit{% endif %}">
+
+                <td>{{ log[0] }}</td>
+                <td>{{ log[1] }}</td>
+                <td>{{ log[2] }}</td>
+                <td>{{ log[3] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+</html>

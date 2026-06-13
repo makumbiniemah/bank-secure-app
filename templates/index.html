@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .topbar {
+            height: 60px;
+            background: white;
+            margin-left: 220px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .cards {
+            margin-left: 240px;
+            margin-top: 20px;
+        }
+
+        .card {
+            display: inline-block;
+            width: 220px;
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-box {
+            margin-left: 240px;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #0a3d62;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3c6382;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>FraudSecure</h2>
+    <a href="/home">Dashboard</a>
+    <a href="/dashboard">Fraud Logs</a>
+    <a href="/alert-settings">Fraud Settings</a>
+    <a href="/profile">Edit Profile</a>
+    <a href="/emails">Email Logs</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+
+    <div class="left">
+        <h3>Bank  Dashboard</h3>
+    </div>
+
+    <div class="middle">
+        <span>Secure Monitoring System</span>
+    </div>
+
+    <div class="right">
+    <div class="profile-dropdown">
+        
+        <h3>
+        Welcome back,
+        {{ session['username'] }}
+    </h3>
+
+    <div class="profile-menu">
+
+       
+
+        <div class="dropdown-content">
+
+            <a href="/profile">
+                My Profile
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div style="margin-left:240px; padding:20px;">
+    <h2 style="color:#0a3d62;">
+        Welcome back, {{ username }}
+    </h2>
+    <p>Here is your fraud monitoring dashboard</p>
+</div>
+<!-- CARDS -->
+<div class="cards">
+
+    <div class="card">
+        <h3>Fraud Check</h3>
+        <p>Real-time detection active</p>
+    </div>
+
+    <div class="card">
+        <h3>Status</h3>
+        <p>System Secure</p>
+    </div>
+
+    <div class="card">
+        <h3>Alerts</h3>
+        <p>Live Monitoring</p>
+    </div>
+
+</div>
+
+<!-- FRAUD FORM -->
+<div class="form-box">
+
+    <h3>Check Transaction</h3>
+
+    <form action="/predict" method="post">
+        <input type="number" name="time" placeholder="Transaction Time" required>
+        <input type="number" name="amount" placeholder="Amount" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    <h4>{{ prediction_text }}</h4>
+
+</div>
+
+</body>
+</html>

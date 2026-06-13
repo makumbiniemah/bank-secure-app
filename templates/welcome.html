@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Secure</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            height:100vh;
+            background:url("{{ url_for('static', filename='images/back3.JPG') }}");
+            background-size:cover;
+            background-position:center;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:Arial, sans-serif;
+        }
+
+        .overlay{
+            background:rgba(0,0,0,0.65);
+            padding:50px;
+            border-radius:15px;
+            text-align:center;
+            color:white;
+            width:600px;
+        }
+
+        h1{
+            font-size:48px;
+            margin-bottom:20px;
+        }
+
+        p{
+            font-size:18px;
+            margin-bottom:30px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:15px 30px;
+            margin:10px;
+            text-decoration:none;
+            color:white;
+            border-radius:8px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .signup{
+            background:#28a745;
+        }
+
+        .login{
+            background:#007bff;
+        }
+
+        .btn:hover{
+            transform:scale(1.05);
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="overlay">
+
+    <h1>Bank Secure</h1>
+
+    <p>
+        Intelligent Fraud Detection System for Secure Banking Transactions.
+        We value your money more than the government 
+    </p>
+
+    <a href="{{ url_for('signup') }}" class="btn signup">
+        Create Account
+    </a>
+
+    <a href="{{ url_for('do_login') }}" class="btn login">
+        Login
+    </a>
+
+</div>
+
+</body>
+</html>

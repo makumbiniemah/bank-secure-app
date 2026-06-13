@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 18px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 5px rgba(37,99,235,0.4);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>🏦 Edit Bank Profile</h2>
+    <div class="subtitle">
+        Update your banking information securely
+    </div>
+
+    <form method="POST">
+
+        <label>Username</label>
+        <input type="text" name="username" value="{{ user[2] }}">
+
+        <label>Email</label>
+        <input type="email" name="email" value="{{ user[1] }}">
+
+        <label>Bank Name</label>
+        <input type="text" name="bank_name" value="{{ user[3] }}">
+
+        <label>Bank Account Number</label>
+        <input type="text" name="card_number" value="{{ user[4] }}">
+
+        <button type="submit">Save Changes</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

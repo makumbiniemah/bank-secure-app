@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>FraudSecure</h2>
+    <a href="/home">Dashboard</a>
+    <a href="/dashboard">Fraud Logs</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/emails">Email Logs</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="main">
+    <h2>Email Logs</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Recipient</th>
+            <th>Message</th>
+            <th>Time</th>
+        </tr>
+
+        {% for e in emails %}
+        <tr>
+            <td>{{ e[0] }}</td>
+            <td>{{ e[1] }}</td>
+            <td>{{ e[2] }}</td>
+            <td>{{ e[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>

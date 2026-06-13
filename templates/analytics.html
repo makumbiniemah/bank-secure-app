@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .main {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .card {
+            display: inline-block;
+            width: 200px;
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>FraudSecure</h2>
+    <a href="/home">Dashboard</a>
+    <a href="/dashboard">Fraud Logs</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/emails">Email Logs</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="main">
+
+    <h2>Analytics Dashboard</h2>
+
+    <!-- STATS CARDS -->
+    <div class="card">
+        <h3>Fraud</h3>
+        <p>{{ fraud_count }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Legitimate</h3>
+        <p>{{ legit_count }}</p>
+    </div>
+
+    <!-- BAR CHART -->
+    <h3>Transaction Amounts</h3>
+    <img src="{{ url_for('static', filename='bar_chart.png') }}" width="500">
+
+    <!-- SCATTER PLOT -->
+    <h3>Fraud vs Amount</h3>
+    <img src="{{ url_for('static', filename='scatter.png') }}" width="500">
+
+</div>
+
+</body>
+</html>

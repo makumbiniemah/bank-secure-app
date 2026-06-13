@@ -1,0 +1,7 @@
+Flask
+Flask-Mail
+pandas
+matplotlib
+joblib
+scikit-learn
+gunicorn
